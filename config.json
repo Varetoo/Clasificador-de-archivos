@@ -1,0 +1,28 @@
+{
+    "carpetas": {
+        "Documentos": true,
+        "Imagenes": true,
+        "Videos": true,
+        "Audio": true,
+        "Archivos comprimidos": true,
+        "Programas e Instaladores": true,
+        "Codigo fuente": true,
+        "Bases de datos": false,
+        "Imagenes de disco": true,
+        "Diseño y Modelado 3D": false,
+        "Fuentes tipográficas": false,
+        "Ejecutables": true,
+        "Libros": true,
+        "Misceláneo y Temporal": false
+    },
+    "renombre de archivos": {
+        "left": "(",
+        "rigth": ")",
+        "_ejemplo": "con left: '(', y right: ')', archivo(1).txt"
+    },
+    "carpeta logs": true,
+    "compresion": {
+        "comprimir archivos": true,
+        "tamaño en MB": 50
+    }
+}

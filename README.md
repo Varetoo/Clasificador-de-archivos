@@ -10,3 +10,5 @@ Funcionamiento principal del programa:
 2.2. Si un archivo es muy grande lo convierte en un comprime a .zip para ahorrar espacio
 3. Se almacenan los archivos en sus carpetas correspondientes.
 4. Se guardan los cambios en el archivo log.txt
+
+El script es configurable y se puede ajustar más a tus necesidades desde el archivo config
