@@ -2,6 +2,8 @@
 import datetime
 import json
 from pathlib import Path
+from modules.comprimir import comprimir
+from modules.renombrar_path import renombrar_path
 
 # ==================== Paths ====================
 carpeta_programa = Path(__file__).parent
@@ -28,21 +30,33 @@ def crear_diccionario(config):   #
     for clave, valor in carpetas.items():
         if valor:
             diccionario.update({clave:[]})
+    diccionario.update({"Otros": []})
     return diccionario
 
 # ==================== 2 ====================
 def clasificar_archivos(diccionario, config, extensions):   #
     # Comprimimos los archivos mas grandes de 50MB (predeterminado, se cambia en config)
     if config["compresion"]["comprimir archivos"]: # Comprobamos la configuración para hacer o no la compresión de archivos
-        # Comprobamos uno a uno cada elemento de la carpeta
-        for elemento in carpeta_a_ordenar.rglob("*"):
-            if elemento.is_file() and carpeta_programa.name not in str(elemento):# Comprobamos que elemento sea un archivo y que no esté en la carpeta del proyecto
-                if elemento.stat().st_size >= (config["compresion"]["tamaño en MB"]*1000000):   # Multiplicamos por 1*10^6 para expresarlo en bytes
-                    nuevo_nombre = elemento.with_suffix(".zip")
-                    with zip.ZipFile(elemento.with_suffix(".zip"), "w") as archivo_comprimido:
-                        archivo_comprimido.write(elemento, arcname=elemento.name)
-                    elemento.unlink()
-            
+        comprimir(config, carpeta_a_ordenar, carpeta_programa)
+    # Almacenamos los Path de todos los archivos en el array
+    lista_path = []
+    for elemento in carpeta_a_ordenar.rglob("*"):
+        if elemento.is_file() and carpeta_programa.name not in str(elemento):# Comprobamos que elemento sea un archivo y que no esté en la carpeta del proyecto
+            lista_path.append(elemento)
+    # Renombramos los Path si hay repetidos y seguimos la configuración para el formato
+    renombrar_path(config, lista_path) 
+    # Ordenamos los archivos y los añadimos al diccionario
+    for elemento in lista_path:
+        encontrado = False
+        for nombre_carpeta, lista_extensiones in extensions.items():
+            if elemento.suffix in lista_extensiones:
+                diccionario[nombre_carpeta].append(elemento)
+                encontrado = True
+                break
+        if encontrado == False: diccionario["Otros"].append(elemento)
+        
+
+    return diccionario
 
 # ==================== 3 ====================
 def movimiento_carpetas(diccionario):   #
@@ -65,7 +79,7 @@ def main():
     configuracion, extensiones = cargar_datos()
     diccionario_carpetas_true = crear_diccionario(configuracion)
     # 2. Clasificamos archivos
-    clasificar_archivos(diccionario_carpetas_true, configuracion, extensiones)
+    diccionario_carpetas_true = clasificar_archivos(diccionario_carpetas_true, configuracion, extensiones)
     # 3. Creamos las carpetas y movemos los archivos
     movimiento_carpetas()
     # 4. Eliminamos las carpetas vacías

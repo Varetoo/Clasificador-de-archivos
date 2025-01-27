@@ -17,7 +17,7 @@
     },
     "renombre de archivos": {
         "left": "(",
-        "rigth": ")",
+        "right": ")",
         "_ejemplo": "con left: '(', y right: ')', archivo(1).txt"
     },
     "carpeta logs": true,
