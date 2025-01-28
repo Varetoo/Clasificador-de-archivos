@@ -18,9 +18,9 @@
     "renombre de archivos": {
         "left": "{",
         "right": "}",
-        "_ejemplo": "NO SE ADMITEN LOS CARACTERES\"/:*?<>|. Con left: '(', y right: ')', archivo(1).txt"
+        "_importante": "NO SE ADMITEN LOS CARACTERES\"/:*?<>|"
     },
-    "carpeta logs": true,
+    "carpeta logs": false,
     "compresion": {
         "comprimir archivos": true,
         "tamaño en MB": 50

@@ -19,7 +19,7 @@ def cargar_datos():   #
         # Leemos el archivo de configuración
         with open("config.json", "r", encoding="utf-8") as archivo:
             diccionario_configuracion = json.load(archivo)
-            del diccionario_configuracion["renombre de archivos"]["_ejemplo"]
+            del diccionario_configuracion["renombre de archivos"]["_importante"]
         # Leemos el archivo de extensiones
         with open("extensiones.json", "r", encoding="utf-8") as archivo:
             diccionario_extensiones = json.load(archivo)
@@ -94,15 +94,15 @@ def eliminar_carpetas_vacias(carpeta):   #
 
 # ==================== MAIN ====================
 def main():
-    # 0. Configuramos el logging para registrar los cambios
-    logging.basicConfig(filename="log.log", level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s", encoding="utf-8")
-    logging.info("Iniciando programa")
-    
     # 1. Cargar configuración
-    logging.debug("Cargando configuración...")
     configuracion, extensiones = cargar_datos()
     diccionario_carpetas_true = crear_diccionario(configuracion)
-    logging.debug("Proceso completado!")
+    
+    # 0. Configuramos el logging para registrar los cambios
+    if configuracion["carpeta logs"]:
+        logging.basicConfig(filename="log.log", level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s", encoding="utf-8")
+    else: logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s", encoding="utf-8")
+    logging.info("Iniciando programa")
     
     # 2. Clasificamos archivos
     logging.debug("Clasificando archivos...")
