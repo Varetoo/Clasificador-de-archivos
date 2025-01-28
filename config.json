@@ -16,9 +16,9 @@
         "Misceláneo y Temporal": false
     },
     "renombre de archivos": {
-        "left": "(",
-        "right": ")",
-        "_ejemplo": "con left: '(', y right: ')', archivo(1).txt"
+        "left": "{",
+        "right": "}",
+        "_ejemplo": "NO SE ADMITEN LOS CARACTERES\"/:*?<>|. Con left: '(', y right: ')', archivo(1).txt"
     },
     "carpeta logs": true,
     "compresion": {

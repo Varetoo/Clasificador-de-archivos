@@ -1,17 +1,6 @@
 from pathlib import Path
+directorio = Path("carpeta pruebas/carpeta1 copy")
 
-diccionario = {
-    "Documentos": [".txt", ".pdf"],
-    "Video": [".vid", ".mp4"]
-}
 
-diccionario_final = {
-    "Documentos": [],
-    "Video": 
-}
-
-archivo = Path("archivo.txt")
-
-for nombre_carpeta, lista_extensiones in diccionario.items():
-    if archivo.suffix in lista_extensiones:
-        diccionario_final[nombre_carpeta].append()
+for elemento in carpeta_a_ordenar.rglob("*"):
+        if elemento.is_file() and carpeta_programa.name not in str(elemento):
